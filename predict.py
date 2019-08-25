@@ -17,6 +17,16 @@ from utils import create_submission, get_img_id, Dataset, bce_dice_loss
 
 
 def predict(val_data, model):
+    """
+    Generates road segmentation predictions.
+
+    Args:
+        val_data (Dataset): Object containing validation dataset.
+        model (DilatedUNet): The compiled and trained model to use for predictions
+
+    Returns:
+        np.ndarray: A 3D array of predicted masks of shape (len(val_data), height, width)
+    """
     batch_n = 10
     val_gen = val_data.image_batch_generator(batch_n)
     y_preds = model.predict_generator(val_gen, steps=np.ceil(len(val_data)/batch_n))
@@ -28,12 +38,14 @@ def predict(val_data, model):
 
 if __name__ == '__main__':
     # load best model weights
+    # replace filepaths and model_params with actual values as needed
     weights_fn = 'dilated-unet_best.hdf5'
     model_params = {'n_blocks': 3, 'filters': 32, 'input_shape': (512, 512, 3),
                     'lr': 2e-4, 'loss': bce_dice_loss, 'optimizer': RMSprop}
     unet = DilatedUNet(**model_params).compile_model()
     unet.load_weights(weights_fn)
 
+    # replace with actual path to validation data directory
     val_dir = 'val/'
     val_paths = sorted(list(Path(val_dir).glob('*_sat.jpg')))
     val_data = Dataset(val_paths)

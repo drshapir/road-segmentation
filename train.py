@@ -20,7 +20,17 @@ from utils import Dataset, bce_dice_loss
 
 
 def load_data(img_dir, test_size=.2):
-    """Loads and preprocesses the image/mask pairs"""
+    """
+    Loads and preprocesses the image/mask pairs
+
+    Args:
+        img_dir (Path-like): Location of all training image/mask pairs.
+        test_size (float): Percentage of training data to keep aside as test data.
+
+    Returns:
+        train_dataset (Dataset)
+        test_dataset (Dataset)
+    """
     img_paths = sorted(list(Path(img_dir).glob('*_sat.jpg')))
     mask_paths = sorted(list(Path(img_dir).glob('*_msk.png')))
 
@@ -33,6 +43,15 @@ def load_data(img_dir, test_size=.2):
 
 
 def train(train_data, test_data, model_params):
+    """
+    Trains the Dilated UNet model, given a dictionary of model parameters.
+
+    Args:
+        train_data (Dataset): Object containing the training data.
+        test_data (Dataset): Object containing the test data.
+        model_params (dict): Contains all hyperparameters for initializing the Dilated UNet model. See the DilatedUNet
+            class definition for info on parameter inputs.
+    """
     model = DilatedUNet(**model_params).compile_model()
     model.summary()
 
@@ -62,10 +81,11 @@ def train(train_data, test_data, model_params):
 
 
 if __name__ == '__main__':
+    # replace train_dir with filepath to training data to run as script
     train_dir = 'train/'
     train_data, test_data = load_data(train_dir, test_size=.2)
 
-    # parameters from our best model
+    # parameters from our best model (can also replace as needed)
     model_params = {'n_blocks': 3, 'filters': 32, 'input_shape': (512, 512, 3),
                     'lr': 2e-4, 'loss': bce_dice_loss, 'optimizer': RMSprop}
 

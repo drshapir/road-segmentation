@@ -12,6 +12,18 @@ from keras.optimizers import RMSprop
 
 
 class DilatedUNet(object):
+    """
+    Implementation of Dilated UNet architecture. See README for description.
+
+    Attributes:
+        n_blocks (int): Number of encoding/decoding blocks to use in model.
+        filters (int): Base number of filters for model. Scales by filters*2**i for each successive encoding block.
+        input_shape (tuple): Shape of input image arrays.
+        lr (float): Learning rate for optimizer
+        loss (function): Loss function
+        optimizer (function): Optimizer to use for training.
+        encoders (list): Encoding blocks used by model. These are concatenated in the decoding steps.
+    """
     def __init__(self, n_blocks=3, filters=32, input_shape=(512, 512, 3),
                  lr=1e-4, loss=bce_dice_loss, optimizer=RMSprop):
         self.n_blocks = n_blocks
