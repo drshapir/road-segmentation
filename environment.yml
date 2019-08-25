@@ -1,0 +1,28 @@
+name: roadseg
+channels:
+  - anaconda
+  - conda-forge
+  - defaults
+dependencies:
+  - cython=0.29.6
+  - h5py=2.9.0
+  - hdf5=1.10.4
+  - ipykernel=5.1.0
+  - ipython=7.3.0
+  - jupyter=1.0.0
+  - jupyterlab=0.35.4
+  - keras=2.2.4
+  - keras-applications=1.0.4
+  - keras-preprocessing=1.0.2
+  - matplotlib=3.0.3
+  - numpy=1.16.2
+  - pandas=0.24.2
+  - pip=19.0.3
+  - python=3.6.8
+  - scikit-image=0.14.2
+  - scikit-learn=0.20.3
+  - scipy=1.2.1
+  - tensorboard=1.12.2
+  - tensorflow=1.1.0
+  - pip:
+    - imgaug==0.2.8
