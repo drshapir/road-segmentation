@@ -12,17 +12,56 @@ Our final model was a blending of two parts:
 
 ![Diagram of Dilated U-Net](network.png)
 
-### U-Net
+## Usage
+
+### Prerequisites
+
+- Keras 2.2.4
+- scikit-image
+- imgaug
+
+### Installing
+
+To create a conda environment, use the given YAML file
+```bash
+git clone https://github.com/drshapir/road-segmentation
+conda env create -f environment.yml
+```
+
+### Data preparation
+
+The model requires a directory with both Google Earth satellite images (256x256) and mask images the provide pixel-by-pixel
+labels of roads. Training and testing datasets should be in separate directories.
+
+### Training and prediction
+
+To train the model using the default parameters (decided through experimentation), run the following command:
+```python
+python train.py
+```
+
+Model hyperparameters and training data path can be modified at the bottom of the training script.
+
+To predict on another directory of images:
+```python
+python predict.py
+```
+
+#### Import functions
+
+Although not built as a Python package, training and prediction code is modularized, so you can import it with an extra step:
+```python
+import sys
+sys.path.append('/path/above/roadseg-repo/')
+import RoadSegmentation
+```
+
+Model hyperparameters, filepath to model weights, and filepath to image data can be modified at the bottom of the prediction script.
 
 
+## Contributors
 
-### Dilated Convolutions
-
-
-
-### Training Process
-
-
+[Yash Lagisetty](https://github.com/oppy2292)
 
 ## Citations
 
