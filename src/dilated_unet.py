@@ -4,11 +4,12 @@ Created on 2019-04-17
 
 @author: dillonshapiro
 """
-from utils import bce_dice_loss, dice_coef
 from keras.layers import Conv2D, MaxPooling2D, UpSampling2D
 from keras.layers import Input, add, concatenate
 from keras.models import Model
 from keras.optimizers import RMSprop
+
+from .utils import bce_dice_loss, dice_coef
 
 
 class DilatedUNet(object):

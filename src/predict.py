@@ -12,8 +12,8 @@ from pathlib import Path
 import numpy as np
 from keras.optimizers import RMSprop
 
-from dilated_unet import DilatedUNet
-from utils import create_submission, get_img_id, Dataset, bce_dice_loss
+from .dilated_unet import DilatedUNet
+from .utils import create_submission, get_img_id, Dataset, bce_dice_loss
 
 
 def predict(val_data, model):

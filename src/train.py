@@ -15,8 +15,8 @@ from keras.callbacks import (TensorBoard, ModelCheckpoint, EarlyStopping,
 from keras.optimizers import RMSprop
 from sklearn.model_selection import train_test_split
 
-from dilated_unet import DilatedUNet
-from utils import Dataset, bce_dice_loss
+from .dilated_unet import DilatedUNet
+from .utils import Dataset, bce_dice_loss
 
 
 def load_data(img_dir, test_size=.2):
